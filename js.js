@@ -38,10 +38,9 @@ function playGame() {
 // variables to store the scores
 let humanScore = 0, computerScore = 0;
 
-// compare options
 
 function playRound(humanChoice, computerChoice) {
-// need to compare choices to find who the winner is
+// compare choices to find who the winner is
   let result = ""
   switch (humanChoice) {
     case "rock":
@@ -84,6 +83,7 @@ function playRound(humanChoice, computerChoice) {
   }
 }
 
+// lazy loop for 5 rounds
 let i = 0;
 while (i < 5) {
   newChoices()
@@ -92,7 +92,7 @@ i = ++i;
 }
 
 
-  // need to display the winner
+  // declare winner and point total
 if (humanScore > computerScore) {
   console.log(`You have won! You scored ${humanScore} points!`);
 } else if (computerScore > humanScore) {
@@ -103,14 +103,10 @@ if (humanScore > computerScore) {
 
 }
 
-
-  // need to give points to the winner
-
-  // need to display the winner
+  // purposely leave variables undefined. If defined they will cause 6 prompts, could resolve through adjust loop but like it this way
 let humanSelection;
 let computerSelection;
 
-playGame()
 
 // generate new choices each round
 function newChoices() {
@@ -118,6 +114,4 @@ function newChoices() {
   computerSelection = getComputerChoice();
 }
 
-// give a point to the winner
-
-// declare winner and point total
+playGame()
