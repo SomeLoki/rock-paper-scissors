@@ -1,36 +1,12 @@
 console.log("The link is established");
 
-// ask the user to pick an option and store it
-// convert option to lowercase so that all inputs work
-const getHumanChoice = function () {
-//  console.log(e);
-//  console.log(e.className);
-  console.log(this)
-  console.log(this.className);
-  playRound(this.className, getComputerChoice());
-
+const getRandom = function () {
+  let randomnum = ((Math.floor(Math.random()*3)) + 1);
+  return randomnum;
 }
 
-const buttons = document.querySelectorAll("button");
-
-buttons.forEach((button) => {
-  button.addEventListener("click", getHumanChoice);
-//    console.log(e);
-//    console.log(e.class);
-//    console.log(this);
-//    console.log(this.className);
-//    playRound(this.className, getComputerChoice());
-//  });
-});
-
-
-
-
-// have the computer generate an option and store it
-// first need to generate a random number, then convert it to an option
-
-function getComputerChoice() {
-  switch (genRandom()) {
+const getComputerChoice = function() {
+  switch (getRandom()) {
     case 1:
     return "rock";
     break;
@@ -45,88 +21,94 @@ function getComputerChoice() {
   }
 }
 
-function genRandom() {
-  let randomnum = ((Math.floor(Math.random()*3)) + 1);
-  return randomnum;
+
+const getHumanChoice = function () {
+  console.log(this)
+  console.log(this.className);
+  playRound(this.className, getComputerChoice());
+
 }
 
-//function playGame() {
+const buttons = document.querySelectorAll("button");
 
-// variables to store the scores
+buttons.forEach((button) => {
+  button.addEventListener("click", getHumanChoice);
+});
+
+const body = document.querySelector("body");
+const endOfRoundMessage = document.createElement("div");
+const scoreBox = document.createElement("div");
+const humanScoreText = document.createElement("span")
+const computerScoreText = document.createElement("span")
 let humanScore = 0, computerScore = 0;
+
+body.appendChild(scoreBox);
+body.appendChild(endOfRoundMessage);
+scoreBox.appendChild(humanScoreText);
+scoreBox.appendChild(computerScoreText);
+
+
+
+
+const endOfRound = function(result, humanChoice, computerChoice) {
+  if (result == "tie") {
+    endOfRoundMessage.textContent = (`You both have picked ${humanChoice} therefore it is a tie. Player score: ${humanScore} Computer score: ${computerScore}`);
+    humanScoreText.textContent = `Player Score: ${humanScore}  `;
+    computerScoreText.textContent = `Computer Score: ${computerScore}  `;
+    } else if (result == "human") {
+      humanScore = ++humanScore;
+      endOfRoundMessage.textContent = (`You won! Your ${humanChoice} beats the computers ${computerChoice} . Player score: ${humanScore} Computer score: ${computerScore}`)
+      humanScoreText.textContent = `Player Score: ${humanScore}  `;
+      computerScoreText.textContent = `Computer Score: ${computerScore}  `;
+    } else {
+    computerScore = ++computerScore;
+    endOfRoundMessage.textContent = (`You lost! Your ${humanChoice} lost to the computers ${computerChoice} . Player score: ${humanScore} Computer score: ${computerScore}`)
+    humanScoreText.textContent = `Player Score: ${humanScore}  `;
+    computerScoreText.textContent = `Computer Score: ${computerScore}  `;
+  }
+  if ( humanScore >= 5 || computerScore >= 5 ) {
+    humanScore >= 5 ? endOfRoundMessage.textContent = `You have won the game!` : endOfRoundMessage.textContent = `The computer has won! Better luck next time.`;
+    buttons.forEach((button) => {
+      button.removeEventListener("click", getHumanChoice);
+    });
+  }
+}
 
 
 function playRound(humanChoice, computerChoice) {
   let result = ""
   switch (humanChoice) {
     case "rock":
-      if (computerChoice == "rock") {
+      if (computerChoice === "rock") {
         result = "tie";
-      } else if (computerChoice == "paper") {
+      } else if (computerChoice === "paper") {
         result = "computer";
-      } else if (computerChoice == "scissors") {
+      } else if (computerChoice === "scissors") {
         result = "human";
       }
       break;
     case "paper":
-      if (computerChoice == "rock") {
+      if (computerChoice === "rock") {
         result = "human";
-      } else if (computerChoice == "paper") {
+      } else if (computerChoice === "paper") {
         result = "tie";
-      } else if (computerChoice == "scissors") {
+      } else if (computerChoice === "scissors") {
         result = "computer";
       }
       break;
       case "scissors":
-        if (computerChoice == "rock") {
+        if (computerChoice === "rock") {
           result = "computer";
-        } else if (computerChoice == "paper") {
+        } else if (computerChoice === "paper") {
           result = "human";
-        } else if (computerChoice == "scissors") {
+        } else if (computerChoice === "scissors") {
           result = "tie";
         }
         break;
   }
-  if (result == "tie") {
-    console.log(`You both have picked ${humanChoice} therefore it is a tie. Player score: ${humanScore} Computer score: ${computerScore}`)
-    } else if (result == "human") {
-      humanScore = ++humanScore;
-      console.log(`You won! Your ${humanChoice} beats the computers ${computerChoice} . Player score: ${humanScore} Computer score: ${computerScore}`)
-    } else {
-    computerScore = ++computerScore;
-    console.log(`You lost! Your ${humanChoice} lost to the computers ${computerChoice} . Player score: ${humanScore} Computer score: ${computerScore}`)
-  }
+  endOfRound(result, humanChoice, computerChoice);
+
 }
 
-// lazy loop for 5 rounds
-//let i = 0;
-//while (i < 5) {
-//  newChoices()
-//  playRound(humanSelection, computerSelection);
-//i = ++i;
-//}
 
 
-  // declare winner and point total
-//if (humanScore > computerScore) {
-//  console.log(`You have won! You scored ${humanScore} points!`);
-//} else if (computerScore > humanScore) {
-//  console.log(`Better luck next time. The computer beat you with a score of ${computerScore}`);
-//} else {
-//  console.log(`You have tied! You both have recieved ${humanScore} points.`);
-//}
-
-//}
-
-  // purposely leave variables undefined. If defined they will cause 6 prompts, could resolve through adjust loop but like it this way
-//let humanSelection;
-//let computerSelection;
-
-
-// generate new choices each round
-//function newChoices() {
-//  humanSelection = getHumanChoice();
-//  computerSelection = getComputerChoice();
-//}
-
-//playGame()
