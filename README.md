@@ -12,7 +12,7 @@ randomtest.html and randomtest.js are both extra files, they were me testing out
 
 TOP has you come back for a rework project, adding additional context: <br>
 
-Rework focuses on:
+Rework focuses on: <br>
 -Use of DOM manipulation to display scores / messages to the player. <br>
 -Use of event listeners to replace prompting the player for a text choice with use of buttons to play. <br>
 -Removed old code and psuedocode / comments. <br>
