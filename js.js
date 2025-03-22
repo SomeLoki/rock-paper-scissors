@@ -2,11 +2,28 @@ console.log("The link is established");
 
 // ask the user to pick an option and store it
 // convert option to lowercase so that all inputs work
-function getHumanChoice() {
-  let choice = prompt("Do you choose rock, paper, or scissors?")
-  choice = choice.toLowerCase();
-  return choice;
+const getHumanChoice = function () {
+//  console.log(e);
+//  console.log(e.className);
+  console.log(this)
+  console.log(this.className);
+  playRound(this.className, getComputerChoice());
+
 }
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", getHumanChoice);
+//    console.log(e);
+//    console.log(e.class);
+//    console.log(this);
+//    console.log(this.className);
+//    playRound(this.className, getComputerChoice());
+//  });
+});
+
+
 
 
 // have the computer generate an option and store it
@@ -33,14 +50,13 @@ function genRandom() {
   return randomnum;
 }
 
-function playGame() {
+//function playGame() {
 
 // variables to store the scores
 let humanScore = 0, computerScore = 0;
 
 
 function playRound(humanChoice, computerChoice) {
-// compare choices to find who the winner is
   let result = ""
   switch (humanChoice) {
     case "rock":
@@ -71,7 +87,6 @@ function playRound(humanChoice, computerChoice) {
         }
         break;
   }
-    // need to give points to the winner
   if (result == "tie") {
     console.log(`You both have picked ${humanChoice} therefore it is a tie. Player score: ${humanScore} Computer score: ${computerScore}`)
     } else if (result == "human") {
@@ -84,34 +99,34 @@ function playRound(humanChoice, computerChoice) {
 }
 
 // lazy loop for 5 rounds
-let i = 0;
-while (i < 5) {
-  newChoices()
-  playRound(humanSelection, computerSelection);
-i = ++i;
-}
+//let i = 0;
+//while (i < 5) {
+//  newChoices()
+//  playRound(humanSelection, computerSelection);
+//i = ++i;
+//}
 
 
   // declare winner and point total
-if (humanScore > computerScore) {
-  console.log(`You have won! You scored ${humanScore} points!`);
-} else if (computerScore > humanScore) {
-  console.log(`Better luck next time. The computer beat you with a score of ${computerScore}`);
-} else {
-  console.log(`You have tied! You both have recieved ${humanScore} points.`);
-}
+//if (humanScore > computerScore) {
+//  console.log(`You have won! You scored ${humanScore} points!`);
+//} else if (computerScore > humanScore) {
+//  console.log(`Better luck next time. The computer beat you with a score of ${computerScore}`);
+//} else {
+//  console.log(`You have tied! You both have recieved ${humanScore} points.`);
+//}
 
-}
+//}
 
   // purposely leave variables undefined. If defined they will cause 6 prompts, could resolve through adjust loop but like it this way
-let humanSelection;
-let computerSelection;
+//let humanSelection;
+//let computerSelection;
 
 
 // generate new choices each round
-function newChoices() {
-  humanSelection = getHumanChoice();
-  computerSelection = getComputerChoice();
-}
+//function newChoices() {
+//  humanSelection = getHumanChoice();
+//  computerSelection = getComputerChoice();
+//}
 
-playGame()
+//playGame()
